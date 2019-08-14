@@ -1,10 +1,10 @@
 // CODE here for your Lambda Classes
 
 class Person {
-  constructor(name, age, location) {
-    this.name = name;
-    this.age = age;
-    this.location = location;
+  constructor(obj) {
+    this.name = obj.name;
+    this.age = obj.age;
+    this.location = obj.location;
   }
   speak() {
     console.log(`Hello, my name is ${this.name}, I am from ${this.location}.`);
@@ -12,11 +12,11 @@ class Person {
 }
 
 class Instructor extends Person {
-  constructor(attrs, specialty, favLanguage, catchPhrase) {
-    super(attrs);
-    this.specialty = specialty;
-    this.favLanguage = favLanguage;
-    this.catchPhrase = catchPhrase;
+  constructor(obj) {
+    super(obj);
+    this.specialty = obj.specialty;
+    this.favLanguage = obj.favLanguage;
+    this.catchPhrase = obj.catchPhrase;
   }
   demo(subject) {
     console.log(`Today, we are learning about ${subject}.`);
@@ -27,12 +27,13 @@ class Instructor extends Person {
 }
 
 class Student extends Person {
-  constructor(attrs, previousBackground, className, favSubjects) {
-    super(attrs);
-    this.previousBackground = previousBackground;
-    this.className = className;
-    this.favSubjects = favSubjects;
+  constructor(obj) {
+    super(obj);
+    this.previousBackground = obj.previousBackground;
+    this.className = obj.className;
+    this.favSubjects = obj.favSubjects;
   }
+
   listsSubjects(array) {
     this.favSubjects = array;
     for (let i = 0; i < this.favSubjects.length; i++) {
@@ -40,7 +41,7 @@ class Student extends Person {
     }
   }
   PRAssignment(subject) {
-    console.log(`${Student.name} has submitted a PR for ${subject}.`);
+    console.log(`${this.name} has submitted a PR for ${subject}.`);
   }
   sprintChallenge(subject) {
     console.log(`${this.name} has begun sprint challenge on ${subject}.`);
@@ -48,10 +49,10 @@ class Student extends Person {
 }
 
 class ProjectManagers extends Instructor {
-  constructor(attrs, gradClassName, favInstructor) {
-    super(attrs);
-    this.gradClassName = gradClassName;
-    this.favInstructor = favInstructor;
+  constructor(obj) {
+    super(obj);
+    this.gradClassName = obj.gradClassName;
+    this.favInstructor = obj.favInstructor;
   }
   standUp(channel) {
     console.log(`${this.name} announces to ${channel}, @channel standy times!`);
@@ -68,26 +69,63 @@ const sophieFavSubjects = ["nap time", "dance", "art"];
 // STUDENT OBJECTS
 const dougie = new Student({
   name: "Dougie",
-  location: "Greenville",
   age: 6,
-  favLanguage: "Douganese",
-  favSubjects: dougieFavSubjects,
-  className: "Homeroom",
-  previousBackground: "no school"
+  location: "Greenville",
+  previousBackground: "K4",
+  className: "K5",
+  favSubjects: dougieFavSubjects
 });
 
 const sophie = new Student({
   name: "Sophie",
-  location: "Greenville",
   age: 3,
-  favLanguage: "Sophanese",
-  favSubjects: sophieFavSubjects,
-  className: "Nap Time",
-  previousBackground: "k4"
+  location: "Greenville",
+  previousBackground: "no school",
+  className: "Pre-K",
+  favSubjects: sophieFavSubjects
 });
 
+// PROJECT MANAGER OBJECTS
+const mrCollins = new ProjectManagers({
+  name: "Mr. Collins",
+  age: 36,
+  location: "Greenville",
+  specialty: "Science",
+  favLanguage: "French",
+  catchPhrase: "Se la vie.",
+  gradClassName: "Titans",
+  favInstructor: "Mr. Anderson"
+});
+
+const mrsCatnip = new ProjectManagers({
+  name: "Mrs. Catnip",
+  age: 32,
+  location: "Greenville",
+  specialty: "Arts",
+  favLanguage: "Japanese",
+  catchPhrase: "If it ain't broke, don't fix it.",
+  gradClassName: "Puss in Boots",
+  favInstructor: "Mrs. Everdeen"
+});
+
+// OUTPUT - INSTRUCTOR OBJECTS
+
 // OUTPUT - STUDENT OBJECTS
-console.log(sophie.previousBackground);
-dougie.PRAssignment("Math");
+
+// From Parent Class
+console.log(dougie.name);
+
+// From Student Class
+console.log(sophie.className);
+
+// Parent Class Method
+dougie.speak();
+sophie.speak();
+
+// Student Class Method
 dougie.listsSubjects(dougieFavSubjects);
 sophie.listsSubjects(sophieFavSubjects);
+dougie.PRAssignment("Math");
+sophie.PRAssignment("Art");
+dougie.sprintChallenge("Science");
+sophie.sprintChallenge("Recess");
