@@ -62,11 +62,30 @@ class ProjectManagers extends Instructor {
   }
 }
 
+// INSTRUCTOR OBJECTS
+const mrsAngel = new Instructor({
+  name: "Mrs. Angel",
+  age: 28,
+  location: "Greenville",
+  specialty: "Home Economics",
+  favLanguage: "Spanish",
+  catchPhrase: "I'm feeling loca."
+});
+
+const mrPanther = new Instructor({
+  name: "Mr. Panther",
+  age: 29,
+  location: "Greenville",
+  specialty: "Anthropology",
+  favLanguage: "German",
+  catchPhrase: "If at first you don't succeed, try try again."
+});
+
+// STUDENT OBJECTS
 // Student favSubjects Arrays
 const dougieFavSubjects = ["art", "music", "lunch"];
 const sophieFavSubjects = ["nap time", "dance", "art"];
 
-// STUDENT OBJECTS
 const dougie = new Student({
   name: "Dougie",
   age: 6,
@@ -109,9 +128,23 @@ const mrsCatnip = new ProjectManagers({
 });
 
 // OUTPUT - INSTRUCTOR OBJECTS
+// From Parent Class
+console.log(mrsAngel.name);
+
+// From Instructor Class
+console.log(mrPanther.specialty);
+
+// Parent Class Method
+mrsAngel.speak();
+mrPanther.speak();
+
+// Instructor Class Method
+mrsAngel.demo(mrsAngel.specialty);
+mrPanther.demo(mrPanther.specialty);
+mrsAngel.grade(dougie, mrsAngel.specialty);
+mrPanther.grade(sophie, mrPanther.specialty);
 
 // OUTPUT - STUDENT OBJECTS
-
 // From Parent Class
 console.log(dougie.name);
 
