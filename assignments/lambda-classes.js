@@ -24,6 +24,21 @@ class Instructor extends Person {
   grade(Student, subject) {
     console.log(`${Student.name} receives a perfect score on ${subject}.`);
   }
+  // STRETCH
+  randomGrade(Student) {
+    let randomScore = Math.floor(Math.random() * 101);
+    let averageGrade = (Student.grade + randomScore) / 2;
+    Student.grade = averageGrade;
+
+    console.log(
+      `${Student.name} received a ${randomScore.toFixed(
+        2
+      )} on their assignment. ${
+        Student.name
+      }'s new grade is ${Student.grade.toFixed(2)}.`
+    );
+    return Student.grade;
+  }
 }
 
 class Student extends Person {
@@ -32,6 +47,8 @@ class Student extends Person {
     this.previousBackground = obj.previousBackground;
     this.className = obj.className;
     this.favSubjects = obj.favSubjects;
+    // STRETCH
+    this.grade = obj.grade;
   }
 
   listsSubjects(array) {
@@ -45,6 +62,13 @@ class Student extends Person {
   }
   sprintChallenge(subject) {
     console.log(`${this.name} has begun sprint challenge on ${subject}.`);
+  }
+  graduate(grade) {
+    if (grade > 70) {
+      console.log(`${this.name} is ready to graduate!`);
+    } else {
+      console.log(`${this.name} is not ready to graduate.`);
+    }
   }
 }
 
@@ -92,7 +116,9 @@ const dougie = new Student({
   location: "Greenville",
   previousBackground: "K4",
   className: "K5",
-  favSubjects: dougieFavSubjects
+  favSubjects: dougieFavSubjects,
+  // STRETCH
+  grade: 95
 });
 
 const sophie = new Student({
@@ -101,7 +127,9 @@ const sophie = new Student({
   location: "Greenville",
   previousBackground: "no school",
   className: "Pre-K",
-  favSubjects: sophieFavSubjects
+  favSubjects: sophieFavSubjects,
+  // STRETCH
+  grade: 99
 });
 
 // PROJECT MANAGER OBJECTS
@@ -188,3 +216,16 @@ mrCollins.standUp("webpt9");
 mrsCatnip.standUp("webpt9_fri");
 mrCollins.debugsCode(dougie, "JavaScript");
 mrsCatnip.debugsCode(sophie, "JQuery");
+
+// STRETCH
+// Testing randomGrade Method with Instructor Objects (Parent Class)
+mrsAngel.randomGrade(sophie);
+mrPanther.randomGrade(dougie);
+
+// Testing randomGrade Method with ProjectManagers Object (Child Class)
+mrsCatnip.randomGrade(dougie);
+mrCollins.randomGrade(dougie);
+
+// Testing Graduate Method from Student Class
+dougie.graduate(dougie.grade);
+sophie.graduate(sophie.grade);
